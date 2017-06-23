@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  componentDidMount(){
+    this.props.testReducer()
+  }
   render() {
     return (
       <div className="App">
