@@ -9,6 +9,11 @@ const cardActiionTypes = {
     SUCCESS: 'CARD_FETCH_ITEMS_SUCCESS',
     FAIL: 'CARD_FETCH_ITEMS_FAIL',
   },
+  UPDATE_ITEMS: {
+    START: 'CARD_UPDATE_ITEMS_START',
+    SUCCESS: 'CARD_UPDATE_ITEMS_SUCCESS',
+    FAIL: 'CARD_UPDATE_ITEMS_FAIL',
+  },
 }
 
 export default cardActiionTypes

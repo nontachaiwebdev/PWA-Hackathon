@@ -3,6 +3,7 @@ import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Slider from 'material-ui/Slider';
 import Dialog from 'material-ui/Dialog';
@@ -62,6 +63,13 @@ export default class allBoard extends Component {
     this.setState({isAddForm: false})
   }
 
+  handleChangeStatus = (item,status) => {
+    const {id} = item
+    const { params: {sprintId}} = this.props
+    console.log(`${id} ${status} ${sprintId}`);
+    this.props.updateCardItem(sprintId, id, {...item,status:status})
+  }
+
   renderNewSprintForm = () => {
     const {isAddForm} = this.state
     const actions = [
@@ -83,12 +91,88 @@ export default class allBoard extends Component {
     )
   }
 
+  renderTodoCardsListItems = (items) => {
+    const itemsList = items.map((item,index)=>{
+      const sprintName = `Card #${index+1} ${item.name}`
+      const score = `Score : ${item.score}`
+      const cardId = item.id
+      const style = {marginBottom: '10px'}
+      return (
+        <Card key={index} style={style} >
+          <CardHeader title={sprintName} subtitle={score}/>
+        <CardText style={{wordBreak: 'break-all'}}>{item.descriptions}</CardText>
+          <CardActions style={{
+            'textAlign': 'right'
+          }}>
+          <RaisedButton label="Add to Doing" primary={true} onTouchTap={ () => this.handleChangeStatus(item,'doing') } />
+          </CardActions>
+        </Card>
+      )
+    })
+    return (
+      <div className='allCardContainer'>
+        {itemsList}
+      </div>
+    )
+  }
+
+  renderDoingCardsListItems = (items) => {
+    const itemsList = items.map((item,index)=>{
+      const sprintName = `Card #${index+1} ${item.name}`
+      const score = `Score : ${item.score}`
+      const cardId = item.id
+      const style = {marginBottom: '10px'}
+      return (
+        <Card key={index} style={style} >
+          <CardHeader title={sprintName} subtitle={score}/>
+          <CardText style={{wordBreak: 'break-all'}}>{item.descriptions}</CardText>
+          <CardActions style={{
+            'textAlign': 'right'
+          }}>
+        <RaisedButton label="Back to Todo" secondary={true} onTouchTap={ () => this.handleChangeStatus(item,'todo') } />
+      <RaisedButton label="Done!!!" primary={true} onTouchTap={ () => this.handleChangeStatus(item,'done') } />
+          </CardActions>
+        </Card>
+      )
+    })
+    return (
+      <div className='allCardContainer'>
+        {itemsList}
+      </div>
+    )
+  }
+
+  renderDoneCardsListItems = (items) => {
+    const itemsList = items.map((item,index)=>{
+      const sprintName = `Card #${index+1} ${item.name}`
+      const score = `Score : ${item.score}`
+      const cardId = item.id
+      const style = {marginBottom: '10px'}
+      return (
+        <Card key={index} style={style} >
+          <CardHeader title={sprintName} subtitle={score}/>
+          <CardText style={{wordBreak: 'break-all'}}>{item.descriptions}</CardText>
+          <CardActions style={{
+            'textAlign': 'right'
+          }}>
+          <RaisedButton label="Back to Doing" secondary={true} onTouchTap={ () => this.handleChangeStatus(item,'doing') } />
+          </CardActions>
+        </Card>
+      )
+    })
+    return (
+      <div className='allCardContainer'>
+        {itemsList}
+      </div>
+    )
+  }
+
   render() {
     const {isMenu} = this.state
     const {sprintItem, params, cardItems} = this.props
     const sprintName = sprintItem.name? sprintItem.name+'' : 'SPRINT NAME'
     const {handleOpenMenuTouch, handleToggleAddNewForm} = this
-    console.log(cardItems);
+    const {todo=[],doing=[],done=[]} = cardItems
     return (
       <div>
         <AppBar title={sprintName.toUpperCase()} iconClassNameRight="muidocs-icon-navigation-expand-more" iconElementRight={< FlatButton label = "Add" />} onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() } onRightIconButtonTouchTap={() => handleToggleAddNewForm()}/>
@@ -99,86 +183,13 @@ export default class allBoard extends Component {
         {this.renderNewSprintForm()}
         <Tabs>
           <Tab label="Todo">
-            <div className='allCardContainer'>
-              <Card>
-                <CardHeader title="Header Menu 1 item 1" subtitle="Subtitle" actAsExpander={true} showExpandableButton={true}/>
-                <CardText expandable={true}>
-                  <p>Date: 12/02/2016 - 15/02/2016</p>
-                  <p>Cards: 100</p>
-                  <p>Done: 20</p>
-                  <p>Expire: 2 Day</p>
-                </CardText>
-                <CardActions expandable={true} style={{
-                  'textAlign': 'right'
-                }}>
-                  <FlatButton label="Detail" fullWidth={true} primary={true} backgroundColor={'#4FC3F7'} style={{
-                    'color': '#FFFFFF'
-                  }}/>
-                </CardActions>
-              </Card>
-            </div>
-            <div className='allCardContainer'>
-              <Card>
-                <CardHeader title="Header Menu 1 item 2" subtitle="Subtitle" actAsExpander={true} showExpandableButton={true}/>
-                <CardText expandable={true}>
-                  <p>Date: 12/02/2016 - 15/02/2016</p>
-                  <p>Cards: 100</p>
-                  <p>Done: 20</p>
-                  <p>Expire: 2 Day</p>
-                </CardText>
-                <CardActions expandable={true} style={{
-                  'textAlign': 'right'
-                }}>
-                  <FlatButton label="Detail" fullWidth={true} primary={true} backgroundColor={'#4FC3F7'} style={{
-                    'color': '#FFFFFF'
-                  }}/>
-                </CardActions>
-              </Card>
-            </div>
+          {this.renderTodoCardsListItems(todo)}
           </Tab>
           <Tab label="Doing">
-            <div>
-              <div className='allCardContainer'>
-                <Card>
-                  <CardHeader title="Header Menu 2" subtitle="Subtitle" actAsExpander={true} showExpandableButton={true}/>
-                  <CardText expandable={true}>
-                    <p>Date: 12/02/2016 - 15/02/2016</p>
-                    <p>Cards: 100</p>
-                    <p>Done: 20</p>
-                    <p>Expire: 2 Day</p>
-                  </CardText>
-                  <CardActions expandable={true} style={{
-                    'textAlign': 'right'
-                  }}>
-                    <FlatButton label="Detail" fullWidth={true} primary={true} backgroundColor={'#4FC3F7'} style={{
-                      'color': '#FFFFFF'
-                    }}/>
-                  </CardActions>
-                </Card>
-              </div>
-            </div>
+          {this.renderDoingCardsListItems(doing)}
           </Tab>
           <Tab label="Done">
-            <div>
-              <div className='allCardContainer'>
-                <Card>
-                  <CardHeader title="Header Menu 3" subtitle="Subtitle" actAsExpander={true} showExpandableButton={true}/>
-                  <CardText expandable={true}>
-                    <p>Date: 12/02/2016 - 15/02/2016</p>
-                    <p>Cards: 100</p>
-                    <p>Done: 20</p>
-                    <p>Expire: 2 Day</p>
-                  </CardText>
-                  <CardActions expandable={true} style={{
-                    'textAlign': 'right'
-                  }}>
-                    <FlatButton label="Detail" fullWidth={true} primary={true} backgroundColor={'#4FC3F7'} style={{
-                      'color': '#FFFFFF'
-                    }}/>
-                  </CardActions>
-                </Card>
-              </div>
-            </div>
+          {this.renderDoneCardsListItems(done)}
           </Tab>
         </Tabs>
       </div>

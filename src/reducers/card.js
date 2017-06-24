@@ -4,7 +4,9 @@ const initialState = {
   isFetching: false,
   isFetchingSuccess: false,
   isAdding: false,
-  isAdddingSuccess: false
+  isAdddingSuccess: false,
+  isUpdate: false,
+  isUpdateSuccess: false
 }
 export default function app(state = initialState, action) {
   switch (action.type) {
@@ -25,6 +27,23 @@ export default function app(state = initialState, action) {
         isAdding: false,
         isAdddingSuccess: false
       }
+      case CARD_ACTION.UPDATE_ITEMS.START:
+        return {
+          ...state,
+          isUpdate: true
+        }
+      case CARD_ACTION.UPDATE_ITEMS.SUCCESS:
+        return {
+          ...state,
+          isUpdate: false,
+          isUpdateSuccess: true
+        }
+      case CARD_ACTION.UPDATE_ITEMS.FAIL:
+        return {
+          ...state,
+          isUpdate: false,
+          isUpdateSuccess: false
+        }
     case CARD_ACTION.FETCH_ITEMS.START:
       return {
         ...state,
