@@ -27,6 +27,12 @@ export default class allBoard extends Component {
     formData: {}
   }
 
+  componentDidMount(){
+    const { params: {sprintId},getSprintDataById,fetchCardItems} = this.props
+    getSprintDataById(sprintId)
+    fetchCardItems(sprintId)
+  }
+
   handleOpenMenuTouch = () => {
     const {isMenu} = this.state
     this.setState({
@@ -45,27 +51,33 @@ export default class allBoard extends Component {
     this.setState({formData: formData})
   }
 
-  handleAddNewSpint = () => {
-    console.log(this.state.formData);
+  handleAddNewCard = () => {
+    const {formData} = this.state
+    const { params: {sprintId}} = this.props
+    const newCardItem = {
+      ...formData,
+      status: 'todo'
+    }
+    this.props.addNewCardItem(sprintId,newCardItem)
     this.setState({isAddForm: false})
   }
 
   renderNewSprintForm = () => {
     const {isAddForm} = this.state
-    const actions = [ < FlatButton label = "Cancel" primary = {
-        true
-      }
-      onTouchTap = {
-        this.handleToggleAddNewForm
-      } />, < FlatButton label = "Add" primary = {
-        true
-      }
-      onTouchTap = {
-        this.handleAddNewSpint
-      } />
+    const actions = [
+      <FlatButton
+        label = "Cancel"
+        primary = {true}
+        onTouchTap = { this.handleToggleAddNewForm}
+      />,
+       <FlatButton
+         label = "Add"
+         primary = {true}
+         onTouchTap = {this.handleAddNewCard}
+       />
     ];
     return (
-      <Dialog title="Add New Sprint" modal={true} open={isAddForm} actions={actions}>
+      <Dialog title="Add New Card" modal={true} open={isAddForm} actions={actions}>
         <CardForm onChange={this.handleSprintFormDataChange}/>
       </Dialog>
     )
@@ -73,10 +85,13 @@ export default class allBoard extends Component {
 
   render() {
     const {isMenu} = this.state
+    const {sprintItem, params, cardItems} = this.props
+    const sprintName = sprintItem.name? sprintItem.name+'' : 'SPRINT NAME'
     const {handleOpenMenuTouch, handleToggleAddNewForm} = this
+    console.log(cardItems);
     return (
       <div>
-        <AppBar title="Sprint Board" iconClassNameRight="muidocs-icon-navigation-expand-more" iconElementRight={< FlatButton label = "Add" />} onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() } onRightIconButtonTouchTap={() => handleToggleAddNewForm()}/>
+        <AppBar title={sprintName.toUpperCase()} iconClassNameRight="muidocs-icon-navigation-expand-more" iconElementRight={< FlatButton label = "Add" />} onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() } onRightIconButtonTouchTap={() => handleToggleAddNewForm()}/>
         <Drawer docked={false} width={200} open={isMenu} onRequestChange= { () => handleOpenMenuTouch() }>
           <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
           <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>

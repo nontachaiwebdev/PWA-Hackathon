@@ -9,6 +9,11 @@ const sprintActiionTypes = {
     SUCCESS: 'SPRINT_FETCH_ITEMS_SUCCESS',
     FAIL: 'SPRINT_FETCH_ITEMS_FAIL',
   },
+  FETCH_ITEM_BY_ID: {
+    START: 'SPRINT_FETCH_ITEM_BY_ID_START',
+    SUCCESS: 'SPRINT_FETCH_ITEM_BY_ID_SUCCESS',
+    FAIL: 'SPRINT_FETCH_ITEM_BY_ID_FAIL',
+  },
 }
 
 export default sprintActiionTypes
