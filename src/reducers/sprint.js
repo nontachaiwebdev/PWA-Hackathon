@@ -25,6 +25,24 @@ export default function app(state = initialState, action) {
         isAdding: false,
         isAdddingSuccess: false
       }
+    case SPRINT_ACTION.FETCH_ITEMS.START:
+      return {
+        ...state,
+        isFetching: true
+      }
+    case SPRINT_ACTION.FETCH_ITEMS.SUCCESS:
+      return {
+        ...state,
+        sprintItems: action.data,
+        isFetching: false,
+        isFetchingSuccess: true
+      }
+    case SPRINT_ACTION.FETCH_ITEMS.FAIL:
+      return {
+        ...state,
+        isFetching: false,
+        isFetchingSuccess: false
+      }
     default:
       return state
   }
