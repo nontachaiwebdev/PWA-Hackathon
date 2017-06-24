@@ -27,6 +27,12 @@ export default class allBoard extends Component {
     formData: {}
   }
 
+  componentDidMount(){
+    const { params} = this.props
+    const sprintId = params.sprintId
+    this.props.getSprintDataById(sprintId)
+  }
+
   handleOpenMenuTouch = () => {
     const {isMenu} = this.state
     this.setState({
@@ -52,20 +58,20 @@ export default class allBoard extends Component {
 
   renderNewSprintForm = () => {
     const {isAddForm} = this.state
-    const actions = [ < FlatButton label = "Cancel" primary = {
-        true
-      }
-      onTouchTap = {
-        this.handleToggleAddNewForm
-      } />, < FlatButton label = "Add" primary = {
-        true
-      }
-      onTouchTap = {
-        this.handleAddNewSpint
-      } />
+    const actions = [
+      <FlatButton
+        label = "Cancel"
+        primary = {true}
+        onTouchTap = { this.handleToggleAddNewForm}
+      />,
+       <FlatButton
+         label = "Add"
+         primary = {true}
+         onTouchTap = {this.handleAddNewSpint}
+       />
     ];
     return (
-      <Dialog title="Add New Sprint" modal={true} open={isAddForm} actions={actions}>
+      <Dialog title="Add New Card" modal={true} open={isAddForm} actions={actions}>
         <CardForm onChange={this.handleSprintFormDataChange}/>
       </Dialog>
     )
@@ -73,10 +79,12 @@ export default class allBoard extends Component {
 
   render() {
     const {isMenu} = this.state
+    const {sprintItem, params} = this.props
+    const sprintName = sprintItem.name? sprintItem.name+'' : ''
     const {handleOpenMenuTouch, handleToggleAddNewForm} = this
     return (
       <div>
-        <AppBar title="Sprint Board" iconClassNameRight="muidocs-icon-navigation-expand-more" iconElementRight={< FlatButton label = "Add" />} onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() } onRightIconButtonTouchTap={() => handleToggleAddNewForm()}/>
+        <AppBar title={sprintName.toUpperCase()} iconClassNameRight="muidocs-icon-navigation-expand-more" iconElementRight={< FlatButton label = "Add" />} onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() } onRightIconButtonTouchTap={() => handleToggleAddNewForm()}/>
         <Drawer docked={false} width={200} open={isMenu} onRequestChange= { () => handleOpenMenuTouch() }>
           <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
           <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>

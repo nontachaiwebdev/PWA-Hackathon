@@ -1,17 +1,20 @@
 import { connect } from 'react-redux'
 import AllBoard from './allBoard'
-import {addNewCardItem,fetchCardItems} from './../../actions/card'
+import {addNewCardItem, fetchCardItems} from './../../actions/card'
+import {getSprintDataById} from './../../actions/sprint'
 
 function mapStateToProps (state) {
   return {
-    cardItems: state.sprint.sprintItems
+    cardItems: state.sprint.cardItems,
+    sprintItem: state.sprint.sprintItem
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     addNewCardItem: (sprintKey,cardItem) => dispatch(addNewCardItem(sprintKey,cardItem)),
-    fetchCardItems: (sprintKey) => dispatch(fetchCardItems())
+    fetchCardItems: (sprintKey) => dispatch(fetchCardItems()),
+    getSprintDataById: (sprintKey) => dispatch(getSprintDataById(sprintKey))
   }
 }
 
