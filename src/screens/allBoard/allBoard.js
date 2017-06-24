@@ -85,9 +85,10 @@ export default class allBoard extends Component {
 
   render() {
     const {isMenu} = this.state
-    const {sprintItem, params} = this.props
+    const {sprintItem, params, cardItems} = this.props
     const sprintName = sprintItem.name? sprintItem.name+'' : 'SPRINT NAME'
     const {handleOpenMenuTouch, handleToggleAddNewForm} = this
+    console.log(cardItems);
     return (
       <div>
         <AppBar title={sprintName.toUpperCase()} iconClassNameRight="muidocs-icon-navigation-expand-more" iconElementRight={< FlatButton label = "Add" />} onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() } onRightIconButtonTouchTap={() => handleToggleAddNewForm()}/>

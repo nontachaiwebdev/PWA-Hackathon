@@ -5,7 +5,7 @@ import {getSprintDataById} from './../../actions/sprint'
 
 function mapStateToProps (state) {
   return {
-    cardItems: state.sprint.cardItems,
+    cardItems: state.card.cardItems,
     sprintItem: state.sprint.sprintItem
   }
 }
@@ -13,7 +13,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     addNewCardItem: (sprintKey,cardItem) => dispatch(addNewCardItem(sprintKey,cardItem)),
-    fetchCardItems: (sprintKey) => dispatch(fetchCardItems()),
+    fetchCardItems: (sprintKey) => dispatch(fetchCardItems(sprintKey)),
     getSprintDataById: (sprintKey) => dispatch(getSprintDataById(sprintKey))
   }
 }
