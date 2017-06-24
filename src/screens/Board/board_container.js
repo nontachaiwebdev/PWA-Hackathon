@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import Baord from './Board'
 import {addNewSprintItem,fetchSprintItems} from './../../actions/sprint'
+import {logout} from './../../actions/app'
 
 function mapStateToProps (state) {
   return {
@@ -11,7 +12,8 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     addNewSprintItem: (sprintItem) => dispatch(addNewSprintItem(sprintItem)),
-    fetchSprintItems: () => dispatch(fetchSprintItems())
+    fetchSprintItems: () => dispatch(fetchSprintItems()),
+    logout: () => dispatch(logout()) 
   }
 }
 

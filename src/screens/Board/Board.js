@@ -117,6 +117,11 @@ export default class Board extends Component {
     browserHistory.push('/board')
   }
 
+  logout = () => {
+    const { logout } = this.props
+    logout()
+  }
+
   render() {
     const {isMenu} = this.state
     const {sprintItems} = this.props
@@ -131,7 +136,7 @@ export default class Board extends Component {
           onRightIconButtonTouchTap={ () => handleToggleAddNewForm() }/>
         <Drawer docked={false} width={200} open={isMenu} onRequestChange= { () => handleOpenMenuTouch() }>
           <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
-          <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
+          <MenuItem onTouchTap={this.logout}>Logout</MenuItem>
         </Drawer>
         {this.renderNewSprintForm()}
         <div className='cardContainer'>
