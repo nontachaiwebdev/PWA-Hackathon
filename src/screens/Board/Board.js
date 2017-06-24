@@ -12,6 +12,14 @@ export default class Board extends Component{
 	    <img src={addIcon} />
 	  </div>
 	</div>
+	<div className='boardCardContainer'>
+          <div className='card'>
+	    <p>Card Sprint 1</p>
+	    <p>1/2/2016 - 10/2/2016</p>
+	    <p>Cards: 38</p>
+	    <p>Done: 20</p>
+	  </div>
+	</div>
       </div>
     )
   }
