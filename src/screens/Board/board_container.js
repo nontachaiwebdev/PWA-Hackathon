@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Baord from './Board'
+import Board from './Board'
 import {addNewSprintItem,fetchSprintItems} from './../../actions/sprint'
 
 function mapStateToProps (state) {
@@ -18,4 +18,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Baord)
+)(Board)
