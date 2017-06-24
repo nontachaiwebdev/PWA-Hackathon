@@ -66,7 +66,7 @@ export default class Board extends Component {
           <CardHeader title={sprintName} subtitle={item.descriptions} actAsExpander={true} showExpandableButton={true}/>
           <CardText expandable={true}>
             <p>{`Date: ${startDate} - ${endDate}`}</p>
-            <p>Cards: 100</p>
+          <p>Cards: 100</p>
             <p>Done: 20</p>
             <p>Expire: 2 Day</p>
           </CardText>

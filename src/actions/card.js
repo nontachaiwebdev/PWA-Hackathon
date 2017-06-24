@@ -25,6 +25,19 @@ export const fetchCardItemsFail = () => {
   return {type: CARD_ACTION.FETCH_ITEMS.FAIL}
 }
 
+export const startUpdateCard = () => {
+  return {type: CARD_ACTION.UPDATE_ITEMS.START}
+}
+
+export const updateCardSuccess = () => {
+  return {type: CARD_ACTION.UPDATE_ITEMS.SUCCESS}
+}
+
+export const updateCardFail = () => {
+  return {type: CARD_ACTION.UPDATE_ITEMS.FAIL}
+}
+
+
 export const addNewCardItem = (sprintKey,cardItem) => (dispatch) => {
   dispatch(startAddNewCard())
   const successHandler = () => {
@@ -38,6 +51,23 @@ export const addNewCardItem = (sprintKey,cardItem) => (dispatch) => {
   const FBCardRef = FireBase.database().ref(`users/${userId}/sprints/${sprintKey}/cards`)
   const FBNewCardRef = FBCardRef.push()
   FBNewCardRef.set(cardItem).then(successHandler).catch(errorHandler)
+}
+
+export const updateCardItem = (sprintKey, cardId, updateData) => (dispatch) => {
+  dispatch(startUpdateCard())
+  const successHandler = () => {
+    dispatch(updateCardSuccess())
+  }
+
+  const errorHandler = () => {
+    dispatch(updateCardFail())
+  }
+  const userId = FireBase.auth().currentUser.uid;
+  const FBCardRef = FireBase.database().ref()
+  const updates = {}
+  updates[`users/${userId}/sprints/${sprintKey}/cards/${cardId}`] = updateData;
+  const FBNewCardRef = FBCardRef.push()
+  FBNewCardRef.update(updates).then(successHandler).catch(errorHandler)
 }
 
 export const fetchCardItems = (sprintKey) => (dispatch) => {
