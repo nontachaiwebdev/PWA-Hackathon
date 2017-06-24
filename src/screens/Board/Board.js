@@ -78,7 +78,7 @@ export default class Board extends Component {
             fullWidth={true}
             primary={true}
             backgroundColor={'#4FC3F7'}
-            onTouchTap={ () => this.redirecToDetail(1) }
+            onTouchTap={ () => this.redirecToDetail(item.id) }
             style={{ 'color': '#FFFFFF' }} />
           </CardActions>
         </Card>
@@ -113,8 +113,8 @@ export default class Board extends Component {
     )
   }
 
-  redirecToDetail = () => {
-    browserHistory.push('/board')
+  redirecToDetail = (sprintId) => {
+    browserHistory.push(`/sprint/${sprintId}`)
   }
 
   logout = () => {
