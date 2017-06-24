@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import './App.css'
 
 class App extends Component {
   componentDidMount(){
     this.props.testReducer()
   }
   render() {
-    return this.props.children
+    return (
+      <MuiThemeProvider>
+        { this.props.children }
+      </MuiThemeProvider>
+    )
   }
 }
 
