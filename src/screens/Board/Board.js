@@ -47,16 +47,22 @@ export default class Board extends Component{
 	      subtitle="Subtitle"
 	      actAsExpander={true}
 	      showExpandableButton={true} />
-	    <CardActions>
-	      <FlatButton label="Action1" />
-	      <FlatButton label="Action2" />
-	    </CardActions>
 	    <CardText expandable={true}>
-	      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	      Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-	      Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-	      Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+	      <p>Date: 12/02/2016 - 15/02/2016</p>
+	      <p>Cards: 100</p>
+	      <p>Done: 20</p>
+	      <p>Expire: 2 Day</p> 
 	    </CardText>
+	    <CardActions 
+	      expandable={true}
+	      style={{'textAlign': 'right'}} >
+	      <FlatButton 
+	        label="Detail" 
+	        fullWidth={true} 
+	        primary={true}
+	        backgroundColor={'#4FC3F7'}
+	        style={{'color': '#FFFFFF'}}  />
+	    </CardActions>
 	  </Card>
 	</div>
       </div>
