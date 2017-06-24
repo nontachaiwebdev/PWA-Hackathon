@@ -37,9 +37,9 @@ const LoginPage = (props) => {
     <div className='loginContainer'>
       <div>
         <div className='img-logo'>
-          <img src={logo} />
+          <img alt='wolfLogo' src={logo} />
         </div>
-        <div className='button' onClick={() => onLogin()}><span><img className='img-logo-facebook' src={logo_f} /></span><span className='text-facebook'>Login With Facebook</span></div>
+        <div className='button' onClick={() => onLogin()}><span><img alt='facebookLogo' className='img-logo-facebook' src={logo_f} /></span><span className='text-facebook'>Login With Facebook</span></div>
       </div>
     </div>
   )
