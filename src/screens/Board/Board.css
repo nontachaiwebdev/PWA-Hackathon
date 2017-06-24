@@ -1,33 +1,5 @@
-.boardHeader{
-  width:100%;
-  padding: 15px 3%;
-  box-sizing: border-box;
-  border-bottom: 1px solid #27ae60;
-  background: #2ecc71;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.boardHeader p{
-  font-size: 1.5em;
-  margin: 0;
-  letter-spacing: 1px;
-  color:#fff;
-  font-weight: 300;
-}
-.addIcon{
-  flex-basis: 2em;
-}
-.addIcon img{
+.cardContainer{
   width: 100%;
-  height: 2em;
-}
-.boardCardContainer{
-  width:100%;
-  padding: 15px 3%;
   box-sizing: border-box;
-}
-.card{
-  background: #ecf0f1;
-  padding: 10px;
+  padding: 15px;
 }
