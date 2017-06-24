@@ -62,4 +62,5 @@ typings/
 .env
 
 .DS_Store
+yarn.lock
 # End of https://www.gitignore.io/api/node

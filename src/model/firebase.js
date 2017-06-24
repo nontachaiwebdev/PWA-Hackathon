@@ -11,13 +11,6 @@ const config = {
 
 firebase.initializeApp(config)
 
-firebase.auth().signInWithEmailAndPassword('testapi@firebase.com', '123456789').catch(function(error) {
-  const errorCode = error.code
-  const errorMessage = error.message
-  console.error(errorCode)
-  console.error(errorMessage)
-}); 
-
 const database = firebase.database()
 
 export default database
