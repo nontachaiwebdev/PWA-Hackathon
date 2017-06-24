@@ -65,9 +65,8 @@ export const updateCardItem = (sprintKey, cardId, updateData) => (dispatch) => {
   const userId = FireBase.auth().currentUser.uid;
   const FBCardRef = FireBase.database().ref()
   const updates = {}
-  updates[`users/${userId}/sprints/${sprintKey}/cards/${cardId}`] = updateData;
-  const FBNewCardRef = FBCardRef.push()
-  FBNewCardRef.update(updates).then(successHandler).catch(errorHandler)
+  updates[`/users/${userId}/sprints/${sprintKey}/cards/${cardId}`] = updateData;
+  FBCardRef.update(updates).then(successHandler).catch(errorHandler)
 }
 
 export const fetchCardItems = (sprintKey) => (dispatch) => {
