@@ -18,7 +18,7 @@ export default class Board extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchSprintItems(1)
+    this.props.fetchSprintItems()
   }
 
   handleOpenMenuTouch = () => {
@@ -43,7 +43,7 @@ export default class Board extends Component {
     }
     const newSprintItem = {...formData,...dateTransform}
 
-    this.props.addNewSprintItem(1,newSprintItem)
+    this.props.addNewSprintItem(newSprintItem)
     this.setState({
       isAddForm: false
     })

@@ -10,8 +10,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    addNewSprintItem: (userId,sprintItem) => dispatch(addNewSprintItem(userId,sprintItem)),
-    fetchSprintItems: (userId) => dispatch(fetchSprintItems(userId))
+    addNewSprintItem: (sprintItem) => dispatch(addNewSprintItem(sprintItem)),
+    fetchSprintItems: () => dispatch(fetchSprintItems())
   }
 }
 

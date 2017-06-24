@@ -25,7 +25,7 @@ export const fetchSprintItemsFail = () => {
   return {type: SPRINT_ACTION.FETCH_ITEMS.FAIL}
 }
 
-export const addNewSprintItem = (userId, sprintItem) => (dispatch) => {
+export const addNewSprintItem = (sprintItem) => (dispatch) => {
   dispatch(startAddNewSprint())
   const successHandler = () => {
     dispatch(addNewSprintSuccess())
@@ -34,13 +34,13 @@ export const addNewSprintItem = (userId, sprintItem) => (dispatch) => {
   const errorHandler = () => {
     dispatch(addNewSprintFail())
   }
-
-  const FBSprintRef = FireBase.ref(`users/${userId}/sprints`)
+  const userId = FireBase.auth().currentUser.uid;
+  const FBSprintRef = FireBase.database().ref(`users/${userId}/sprints`)
   const FBNewSprintRef = FBSprintRef.push()
   FBNewSprintRef.set(sprintItem).then(successHandler).catch(errorHandler)
 }
 
-export const fetchSprintItems = (userId) => (dispatch) => {
+export const fetchSprintItems = () => (dispatch) => {
   dispatch(startFetchSprintItems())
   const successHandler = (snapshot) => {
 
@@ -56,7 +56,8 @@ export const fetchSprintItems = (userId) => (dispatch) => {
     dispatch(fetchSprintItemsFail())
   }
 
-  const FBSprintRef = FireBase.ref(`users/${userId}/sprints`)
+  const userId = FireBase.auth().currentUser.uid;
+  const FBSprintRef = FireBase.database().ref(`users/${userId}/sprints`)
   FBSprintRef.on('value', successHandler, errorHandler)
 
 }
