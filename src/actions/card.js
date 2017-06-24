@@ -44,9 +44,25 @@ export const fetchCardItems = (sprintKey) => (dispatch) => {
   dispatch(startFetchCardItems())
   const successHandler = (snapshot) => {
 
-    const response = []
+    const response = {
+      todo:[],
+      doing:[],
+      done: []
+    }
     snapshot.forEach(snap => {
-      response.push({...snap.val(),id: snap.key})
+      const item = snap.val()
+      const status = item.status
+      switch (status) {
+        case "doing":
+          response.doing.push({...snap.val(),id: snap.key})
+          break;
+        case "done":
+          response.done.push({...snap.val(),id: snap.key})
+          break;
+        default:
+          response.todo.push({...snap.val(),id: snap.key})
+          break;
+      }
     })
 
     dispatch(fetchCardItemsSuccess(response))
