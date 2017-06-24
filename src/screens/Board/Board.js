@@ -57,11 +57,13 @@ export default class Board extends Component {
 
   renderSprintListItems = (items) => {
     const itemsList = items.map((item,index)=>{
+      const sprintName = `Sprint #${index+1} ${item.name}`
       const startDate = moment(item.startDate).format("MMM Do YY");
       const endDate = moment(item.endDate).format("MMM Do YY");
+      const style = {marginBottom: '10px'}
       return (
-        <Card key={index}>
-          <CardHeader title={item.name} subtitle={item.descriptions} actAsExpander={true} showExpandableButton={true}/>
+        <Card key={index} style={style} >
+          <CardHeader title={sprintName} subtitle={item.descriptions} actAsExpander={true} showExpandableButton={true}/>
           <CardText expandable={true}>
             <p>{`Date: ${startDate} - ${endDate}`}</p>
             <p>Cards: 100</p>
