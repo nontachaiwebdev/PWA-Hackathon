@@ -7,8 +7,8 @@ import allBoard from './../../screens/allBoard'
 const Routes = (
   <Route path='/' component={App}>
     <IndexRoute component={Board} />
-    <Route path='/board' component={allBoard} />
-    <Route path='*' component={App} />
+  <Route path='/sprint/:sprintId' component={allBoard} />
+    <Route path='*' component={Board} />
   </Route>
 )
 
