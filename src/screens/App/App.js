@@ -15,7 +15,7 @@ class App extends Component {
 
   signIn = () => {
     const { login } = this.props
-    //login()
+    login()
   }
 
   render() {
