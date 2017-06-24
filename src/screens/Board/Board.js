@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import SprintForm from './components/SprintForm'
+import moment from 'moment'
 import { browserHistory } from 'react-router'
 import './Board.css'
 
@@ -14,6 +15,10 @@ export default class Board extends Component {
     isMenu: false,
     isAddForm: false,
     formData: {}
+  }
+
+  componentDidMount(){
+    this.props.fetchSprintItems(1)
   }
 
   handleOpenMenuTouch = () => {
@@ -37,7 +42,7 @@ export default class Board extends Component {
       endDate: formData.endDate.getTime()
     }
     const newSprintItem = {...formData,...dateTransform}
-    
+
     this.props.addNewSprintItem(1,newSprintItem)
     this.setState({
       isAddForm: false
@@ -48,6 +53,36 @@ export default class Board extends Component {
     this.setState({
       formData: formData
     })
+  }
+
+  renderSprintListItems = (items) => {
+    const itemsList = items.map((item,index)=>{
+      const startDate = moment(item.startDate).format("MMM Do YY");
+      const endDate = moment(item.endDate).format("MMM Do YY");
+      return (
+        <Card key={index}>
+          <CardHeader title={item.name} subtitle={item.descriptions} actAsExpander={true} showExpandableButton={true}/>
+          <CardText expandable={true}>
+            <p>{`Date: ${startDate} - ${endDate}`}</p>
+            <p>Cards: 100</p>
+            <p>Done: 20</p>
+            <p>Expire: 2 Day</p>
+          </CardText>
+          <CardActions expandable={true} style={{
+            'textAlign': 'right'
+          }}>
+          <FlatButton
+            label="Detail"
+            fullWidth={true}
+            primary={true}
+            backgroundColor={'#4FC3F7'}
+            onTouchTap={ () => this.redirecToDetail(1) }
+            style={{ 'color': '#FFFFFF' }} />
+          </CardActions>
+        </Card>
+      )
+    })
+    return itemsList
   }
 
   renderNewSprintForm = () => {
@@ -82,7 +117,8 @@ export default class Board extends Component {
 
   render() {
     const {isMenu} = this.state
-    const {handleOpenMenuTouch, handleToggleAddNewForm, redirecToDetail} = this
+    const {sprintItems} = this.props
+    const {handleOpenMenuTouch, handleToggleAddNewForm} = this
     return (
       <div>
         <AppBar
@@ -97,26 +133,7 @@ export default class Board extends Component {
         </Drawer>
         {this.renderNewSprintForm()}
         <div className='cardContainer'>
-          <Card>
-            <CardHeader title="Without Avatar" subtitle="Subtitle" actAsExpander={true} showExpandableButton={true}/>
-            <CardText expandable={true}>
-              <p>Date: 12/02/2016 - 15/02/2016</p>
-              <p>Cards: 100</p>
-              <p>Done: 20</p>
-              <p>Expire: 2 Day</p>
-            </CardText>
-            <CardActions expandable={true} style={{
-              'textAlign': 'right'
-            }}>
-              <FlatButton 
-                label="Detail" 
-                fullWidth={true} 
-                primary={true} 
-                backgroundColor={'#4FC3F7'} 
-                onTouchTap={ () => redirecToDetail() }
-                style={{ 'color': '#FFFFFF' }} />
-            </CardActions>
-          </Card>
+          {this.renderSprintListItems(sprintItems)}
         </div>
       </div>
     )
