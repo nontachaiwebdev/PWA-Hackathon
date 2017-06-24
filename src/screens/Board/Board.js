@@ -13,7 +13,8 @@ injectTapEventPlugin();
 export default class Board extends Component {
   state = {
     isMenu: false,
-    isAddForm: false
+    isAddForm: false,
+    formData: {}
   }
 
   handleOpenMenuTouch = () => {
@@ -30,6 +31,19 @@ export default class Board extends Component {
     })
   }
 
+  handleAddNewSpint = () => {
+    console.log(this.state.formData);
+    this.setState({
+      isAddForm: false
+    })
+  }
+
+  handleSprintFormDataChange = (formData) => {
+    this.setState({
+      formData: formData
+    })
+  }
+
   renderNewSprintForm = () => {
     const {isAddForm} = this.state
     const actions = [
@@ -41,8 +55,7 @@ export default class Board extends Component {
       <FlatButton
         label="Add"
         primary={true}
-        disabled={true}
-        onTouchTap={this.handleToggleAddNewForm}
+        onTouchTap={this.handleAddNewSpint}
       />,
   ];
     return (
@@ -52,7 +65,7 @@ export default class Board extends Component {
         open={isAddForm}
         actions={actions}
       >
-        <SprintForm/>
+        <SprintForm onChange={this.handleSprintFormDataChange}/>
       </Dialog>
     )
   }
@@ -66,7 +79,7 @@ export default class Board extends Component {
         <AppBar
           title="Sprint Board"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
-          iconElementRight={< FlatButton label = "Add" />}
+          iconElementRight={<FlatButton label = "Add" />}
           onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() }
           onRightIconButtonTouchTap={ () => handleToggleAddNewForm() }/>
         <Drawer docked={false} width={200} open={isMenu} onRequestChange= { () => handleOpenMenuTouch() }>
