@@ -10,7 +10,6 @@ import database from './../../model/firebase'
 
 database.ref('test').once('value', snap => { 
   const invite = snap.val();
-  console.log(invite)
 })
 
 let store = createStore(
