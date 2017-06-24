@@ -63,11 +63,11 @@ export default class allBoard extends Component {
     this.setState({isAddForm: false})
   }
 
-  handleChangeStatus = (cardId,status) => {
-
+  handleChangeStatus = (item,status) => {
+    const {id} = item
     const { params: {sprintId}} = this.props
-    console.log(`${cardId} ${status} ${sprintId}`);
-    this.props.updateCardItem(sprintId, cardId, {status:status})
+    console.log(`${id} ${status} ${sprintId}`);
+    this.props.updateCardItem(sprintId, id, {...item,status:status})
   }
 
   renderNewSprintForm = () => {
@@ -104,7 +104,7 @@ export default class allBoard extends Component {
           <CardActions style={{
             'textAlign': 'right'
           }}>
-          <RaisedButton label="Add to Doing" primary={true} onTouchTap={ () => this.handleChangeStatus(cardId,'doing') } />
+          <RaisedButton label="Add to Doing" primary={true} onTouchTap={ () => this.handleChangeStatus(item,'doing') } />
           </CardActions>
         </Card>
       )
@@ -119,7 +119,7 @@ export default class allBoard extends Component {
   renderDoingCardsListItems = (items) => {
     const itemsList = items.map((item,index)=>{
       const sprintName = `Card #${index+1} ${item.name}`
-      const score = `Score #${item.score}`
+      const score = `Score : ${item.score}`
       const cardId = item.id
       const style = {marginBottom: '10px'}
       return (
@@ -129,8 +129,8 @@ export default class allBoard extends Component {
           <CardActions style={{
             'textAlign': 'right'
           }}>
-        <RaisedButton label="Back to Todo" secondary={true} onTouchTap={ () => this.handleChangeStatus(cardId,'todo') } />
-      <RaisedButton label="Done!!!" primary={true} onTouchTap={ () => this.handleChangeStatus(cardId,'done') } />
+        <RaisedButton label="Back to Todo" secondary={true} onTouchTap={ () => this.handleChangeStatus(item,'todo') } />
+      <RaisedButton label="Done!!!" primary={true} onTouchTap={ () => this.handleChangeStatus(item,'done') } />
           </CardActions>
         </Card>
       )
@@ -145,7 +145,7 @@ export default class allBoard extends Component {
   renderDoneCardsListItems = (items) => {
     const itemsList = items.map((item,index)=>{
       const sprintName = `Card #${index+1} ${item.name}`
-      const score = `Score #${item.score}`
+      const score = `Score : ${item.score}`
       const cardId = item.id
       const style = {marginBottom: '10px'}
       return (
@@ -155,7 +155,7 @@ export default class allBoard extends Component {
           <CardActions style={{
             'textAlign': 'right'
           }}>
-          <RaisedButton label="Back to Doing" secondary={true} onTouchTap={ () => this.handleChangeStatus(cardId,'doing') } />
+          <RaisedButton label="Back to Doing" secondary={true} onTouchTap={ () => this.handleChangeStatus(item,'doing') } />
           </CardActions>
         </Card>
       )
