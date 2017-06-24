@@ -113,8 +113,7 @@ export default class Board extends Component {
     )
   }
 
-  redirecToDetail = (sprintId) => {
-    console.log(sprintId)
+  redirecToDetail = () => {
     browserHistory.push('/board')
   }
 
