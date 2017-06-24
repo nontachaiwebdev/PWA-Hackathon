@@ -9,5 +9,7 @@ export default function app(state = initialState, action) {
         ...state,
         appData: action.data
       }
+    default:
+      return state
   }
 }
