@@ -76,8 +76,7 @@ export default class Board extends Component {
     )
   }
 
-  redirecToDetail = (sprintId) => {
-    console.log(sprintId)
+  redirecToDetail = () => {
     browserHistory.push('/board')
   }
 
@@ -114,7 +113,7 @@ export default class Board extends Component {
                 fullWidth={true} 
                 primary={true} 
                 backgroundColor={'#4FC3F7'} 
-                onTouchTap={ () => redirecToDetail(1) }
+                onTouchTap={ () => redirecToDetail() }
                 style={{ 'color': '#FFFFFF' }} />
             </CardActions>
           </Card>
