@@ -5,6 +5,8 @@ import MenuItem from 'material-ui/MenuItem'
 import FlatButton from 'material-ui/FlatButton'
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Slider from 'material-ui/Slider';
+import Dialog from 'material-ui/Dialog';
+import CardForm from './components/CardForm'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import './allBoard.css'
 
@@ -20,7 +22,9 @@ export default class allBoard extends Component {
   }
 
   state = {
-    isMenu: false
+    isMenu: false,
+    isAddForm: false,
+    formData: {}
   }
 
   handleOpenMenuTouch = () => {
@@ -30,20 +34,68 @@ export default class allBoard extends Component {
     })
   }
 
+  handleToggleAddNewForm = () => {
+    const {isAddForm} = this.state
+    this.setState({
+      isAddForm: !isAddForm
+    })
+  }
+
+  handleSprintFormDataChange = (formData) => {
+    this.setState({
+      formData: formData
+    })
+  }
+
+  handleAddNewSpint = () => {
+    console.log(this.state.formData);
+    this.setState({
+      isAddForm: false
+    })
+  }
+
+  renderNewSprintForm = () => {
+    const {isAddForm} = this.state
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleToggleAddNewForm}
+      />,
+      <FlatButton
+        label="Add"
+        primary={true}
+        onTouchTap={this.handleAddNewSpint}
+      />,
+  ];
+    return (
+      <Dialog
+        title="Add New Sprint"
+        modal={true}
+        open={isAddForm}
+        actions={actions}
+      >
+        <CardForm onChange={this.handleSprintFormDataChange}/>
+      </Dialog>
+    )
+  }
+
   render() {
     const {isMenu} = this.state
-    const {handleOpenMenuTouch} = this
+    const {handleOpenMenuTouch,handleToggleAddNewForm} = this
     return (
       <div>
         <AppBar
           title="Sprint Board"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
-          iconElementRight={< FlatButton label = "Add" />}
-          onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() }/>
+          iconElementRight={<FlatButton label = "Add" />}
+          onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() }
+          onRightIconButtonTouchTap={ () => handleToggleAddNewForm() }/>
         <Drawer docked={false} width={200} open={isMenu} onRequestChange= { () => handleOpenMenuTouch() }>
           <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
           <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
         </Drawer>
+        {this.renderNewSprintForm()}
         <Tabs>
 		    <Tab label="Item One" >
 		        <div className='allCardContainer'>
