@@ -6,6 +6,12 @@ import { Router, browserHistory } from 'react-router'
 import thunk from 'redux-thunk'
 import Routes from './../Router'
 import reducer from './../../reducers'
+import database from './../../model/firebase'
+
+database.ref('test').once('value', snap => { 
+  const invite = snap.val();
+  console.log(invite)
+})
 
 let store = createStore(
   reducer,
