@@ -5,12 +5,11 @@ import MenuItem from 'material-ui/MenuItem'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import SprintForm from './components/SprintForm'
 import moment from 'moment'
+import { browserHistory } from 'react-router'
 import './Board.css'
 
-injectTapEventPlugin();
 export default class Board extends Component {
   state = {
     isMenu: false,
@@ -72,9 +71,13 @@ export default class Board extends Component {
           <CardActions expandable={true} style={{
             'textAlign': 'right'
           }}>
-            <FlatButton label="Detail" fullWidth={true} primary={true} backgroundColor={'#4FC3F7'} style={{
-              'color': '#FFFFFF'
-            }}/>
+          <FlatButton
+            label="Detail"
+            fullWidth={true}
+            primary={true}
+            backgroundColor={'#4FC3F7'}
+            onTouchTap={ () => this.redirecToDetail(1) }
+            style={{ 'color': '#FFFFFF' }} />
           </CardActions>
         </Card>
       )
@@ -108,10 +111,15 @@ export default class Board extends Component {
     )
   }
 
+  redirecToDetail = (sprintId) => {
+    console.log(sprintId)
+    browserHistory.push('/board')
+  }
+
   render() {
     const {isMenu} = this.state
-    const {handleOpenMenuTouch, handleToggleAddNewForm} = this
     const {sprintItems} = this.props
+    const {handleOpenMenuTouch, handleToggleAddNewForm} = this
     return (
       <div>
         <AppBar

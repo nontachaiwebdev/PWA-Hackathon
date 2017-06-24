@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import firebase from 'firebase'
 import './App.css'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin();
+
 class App extends Component {
 
   state = {
