@@ -3,22 +3,22 @@
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "wolf-192.png",
+      "src": "wolf-low.jpg",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "wolf-256.png",
+      "src": "wolf-low.jpg",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "wolf-384.png",
+      "src": "wolf-low.jpg",
       "sizes": "384x384",
       "type": "image/png"
     },
     {
-      "src": "wolf-512.png",
+      "src": "wolf-low.jpg",
       "sizes": "512x512",
       "type": "image/png"
     }
