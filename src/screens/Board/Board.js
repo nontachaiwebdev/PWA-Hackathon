@@ -32,7 +32,14 @@ export default class Board extends Component {
   }
 
   handleAddNewSpint = () => {
-    console.log(this.state.formData);
+    const {formData} = this.state
+    const dateTransform = {
+      startDate: formData.startDate.getTime(),
+      endDate: formData.endDate.getTime()
+    }
+    const newSprintItem = {...formData,...dateTransform}
+    
+    this.props.addNewSprintItem(1,newSprintItem)
     this.setState({
       isAddForm: false
     })

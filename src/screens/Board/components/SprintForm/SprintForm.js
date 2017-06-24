@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 
