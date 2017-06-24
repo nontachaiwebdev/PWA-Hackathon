@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux'
+import { Router, browserHistory } from 'react-router'
+import thunk from 'redux-thunk'
+import Routes from './../Router'
 import reducer from './../../reducers'
-import App from './../../screens/App'
 import database from './../../model/firebase'
 
 database.ref('test').once('value', snap => { 
@@ -13,7 +15,9 @@ database.ref('test').once('value', snap => {
 
 let store = createStore(
   reducer,
-  composeWithDevTools()
+  composeWithDevTools(
+    applyMiddleware(thunk)
+  )
 )
 
 export default class AppRoot extends Component {
@@ -21,7 +25,7 @@ export default class AppRoot extends Component {
   render(){
     return (
       <Provider store={store} >
-        <App />
+        <Router routes={Routes} history={browserHistory} />
       </Provider>
     )
   }
