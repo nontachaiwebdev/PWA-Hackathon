@@ -1,30 +1,51 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 
 export default class SprintForm extends Component {
   state = {
-    selectedStartDate: null,
-    selectedEndDate: null
+    name: '',
+    descriptions: '',
+    startDate: null,
+    endDate: null
+  }
+
+  handleFormDataChange = () => {
+    this.props.onChange(this.state)
+  }
+
+  handleNameChange = (event) => {
+    this.setState({
+      name: event.target.value
+    }, this.handleFormDataChange)
+  }
+
+  handleDescriptionsChange = (event) => {
+    this.setState({
+      descriptions: event.target.value
+    }, this.handleFormDataChange)
   }
 
   handleStartDateChange = (event, date) => {
-    this.setState({selectedStartDate: date})
+    this.setState({
+      startDate: date
+    }, this.handleFormDataChange)
   }
 
   handleEndDateChange = (event, date) => {
-    this.setState({selectedEndDate: date})
+    this.setState({
+      endDate: date
+    }, this.handleFormDataChange)
   }
 
   render() {
-    const {selectedStartDate, selectedEndDate} = this.state
+    const {startDate} = this.state
     return (
       <div>
-        <TextField floatingLabelText="Name"/>
-        <TextField floatingLabelText="Descriptions"/>
+        <TextField floatingLabelText="Name" onChange={this.handleNameChange}/>
+      <TextField floatingLabelText="Descriptions" onChange={this.handleDescriptionsChange}/>
         <DatePicker floatingLabelText="Start Date" autoOk disableYearSelection onChange={this.handleStartDateChange}/>
-        <DatePicker floatingLabelText="End Date" minDate={selectedStartDate} autoOk disableYearSelection onChange={this.handleEndDateChange}/>
+        <DatePicker floatingLabelText="End Date" minDate={startDate} autoOk disableYearSelection onChange={this.handleEndDateChange}/>
       </div>
 
     );
