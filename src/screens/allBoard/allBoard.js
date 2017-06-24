@@ -28,9 +28,9 @@ export default class allBoard extends Component {
   }
 
   componentDidMount(){
-    const { params} = this.props
-    const sprintId = params.sprintId
-    this.props.getSprintDataById(sprintId)
+    const { params: {sprintId},getSprintDataById,fetchCardItems} = this.props
+    getSprintDataById(sprintId)
+    fetchCardItems(sprintId)
   }
 
   handleOpenMenuTouch = () => {
@@ -51,8 +51,14 @@ export default class allBoard extends Component {
     this.setState({formData: formData})
   }
 
-  handleAddNewSpint = () => {
-    console.log(this.state.formData);
+  handleAddNewCard = () => {
+    const {formData} = this.state
+    const { params: {sprintId}} = this.props
+    const newCardItem = {
+      ...formData,
+      status: 'todo'
+    }
+    this.props.addNewCardItem(sprintId,newCardItem)
     this.setState({isAddForm: false})
   }
 
@@ -67,7 +73,7 @@ export default class allBoard extends Component {
        <FlatButton
          label = "Add"
          primary = {true}
-         onTouchTap = {this.handleAddNewSpint}
+         onTouchTap = {this.handleAddNewCard}
        />
     ];
     return (
@@ -80,7 +86,7 @@ export default class allBoard extends Component {
   render() {
     const {isMenu} = this.state
     const {sprintItem, params} = this.props
-    const sprintName = sprintItem.name? sprintItem.name+'' : ''
+    const sprintName = sprintItem.name? sprintItem.name+'' : 'SPRINT NAME'
     const {handleOpenMenuTouch, handleToggleAddNewForm} = this
     return (
       <div>
