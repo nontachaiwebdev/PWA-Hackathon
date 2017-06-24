@@ -4,10 +4,8 @@ import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import FlatButton from 'material-ui/FlatButton'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import './Board.css'
 
-injectTapEventPlugin();
 export default class Board extends Component {
   state = {
     isMenu: false
