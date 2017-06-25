@@ -8,6 +8,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import Slider from 'material-ui/Slider';
 import Dialog from 'material-ui/Dialog';
 import CardForm from './components/CardForm'
+import { browserHistory } from 'react-router'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import './allBoard.css'
 
@@ -167,6 +168,15 @@ export default class allBoard extends Component {
     )
   }
 
+    logout = () => {
+    const { logout } = this.props
+    logout()
+  }
+
+  redirecToBoard = () => {
+    browserHistory.push('/board')
+  }
+
   render() {
     const {isMenu} = this.state
     const {sprintItem, params, cardItems} = this.props
@@ -177,8 +187,8 @@ export default class allBoard extends Component {
       <div>
         <AppBar title={sprintName.toUpperCase()} iconClassNameRight="muidocs-icon-navigation-expand-more" iconElementRight={< FlatButton label = "Add" />} onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() } onRightIconButtonTouchTap={() => handleToggleAddNewForm()}/>
         <Drawer docked={false} width={200} open={isMenu} onRequestChange= { () => handleOpenMenuTouch() }>
-          <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
-          <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
+          <MenuItem onTouchTap={this.redirecToBoard}>Back</MenuItem>
+          <MenuItem onTouchTap={this.logout}>logout</MenuItem>
         </Drawer>
         {this.renderNewSprintForm()}
         <Tabs>

@@ -135,7 +135,6 @@ export default class Board extends Component {
           onLeftIconButtonTouchTap= { () => handleOpenMenuTouch() }
           onRightIconButtonTouchTap={ () => handleToggleAddNewForm() }/>
         <Drawer docked={false} width={200} open={isMenu} onRequestChange= { () => handleOpenMenuTouch() }>
-          <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
           <MenuItem onTouchTap={this.logout}>Logout</MenuItem>
         </Drawer>
         {this.renderNewSprintForm()}
