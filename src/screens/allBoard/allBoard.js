@@ -5,7 +5,6 @@ import MenuItem from 'material-ui/MenuItem'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import {Tabs, Tab} from 'material-ui/Tabs';
-import Slider from 'material-ui/Slider';
 import Dialog from 'material-ui/Dialog';
 import CardForm from './components/CardForm'
 import { browserHistory } from 'react-router'
@@ -96,7 +95,6 @@ export default class allBoard extends Component {
     const itemsList = items.map((item,index)=>{
       const sprintName = `Card #${index+1} ${item.name}`
       const score = `Score : ${item.score}`
-      const cardId = item.id
       const style = {marginBottom: '10px'}
       return (
         <Card key={index} style={style} >
@@ -121,7 +119,6 @@ export default class allBoard extends Component {
     const itemsList = items.map((item,index)=>{
       const sprintName = `Card #${index+1} ${item.name}`
       const score = `Score : ${item.score}`
-      const cardId = item.id
       const style = {marginBottom: '10px'}
       return (
         <Card key={index} style={style} >
@@ -147,7 +144,6 @@ export default class allBoard extends Component {
     const itemsList = items.map((item,index)=>{
       const sprintName = `Card #${index+1} ${item.name}`
       const score = `Score : ${item.score}`
-      const cardId = item.id
       const style = {marginBottom: '10px'}
       return (
         <Card key={index} style={style} >
@@ -179,7 +175,7 @@ export default class allBoard extends Component {
 
   render() {
     const {isMenu} = this.state
-    const {sprintItem, params, cardItems} = this.props
+    const {sprintItem, cardItems} = this.props
     const sprintName = sprintItem.name? sprintItem.name+'' : 'SPRINT NAME'
     const {handleOpenMenuTouch, handleToggleAddNewForm} = this
     const {todo=[],doing=[],done=[]} = cardItems

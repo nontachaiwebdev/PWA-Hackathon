@@ -38,7 +38,6 @@ export default class CardForm extends Component {
   }
 
   render() {
-    const {startDate} = this.state
     return (
       <div>
         <TextField floatingLabelText="Name" onChange={this.handleNameChange}/>
